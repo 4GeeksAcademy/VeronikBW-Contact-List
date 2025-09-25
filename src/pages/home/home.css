@@ -1,0 +1,21 @@
+.fullName {
+    font-weight: lighter;
+    font-size: 1.3rem;
+}
+.address, 
+.phoneNumber,
+.email {
+    font-size: 1rem;
+    color: grey;
+}
+.botoncito {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
