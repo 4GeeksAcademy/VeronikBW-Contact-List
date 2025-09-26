@@ -52,7 +52,7 @@ export const AddContact = () => {
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col-12 col-md-9 mx-auto mt-3 border border-danger">
+                    <div className="col-12 col-md-9 mx-auto mt-3">
                         <form onSubmit={addNewContact}>
                             <legend className="formLegend d-flex justify-content-center">Add a new contact</legend>
                             <div class="mb-3">
