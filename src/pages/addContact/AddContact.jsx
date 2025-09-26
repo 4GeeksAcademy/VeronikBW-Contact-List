@@ -1,9 +1,10 @@
-import { Form } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
 import "./addContact.css"
 
+
 export const AddContact = () => {
-    return (
+        return (
         <>
             <div className="container">
                 <div className="row">
@@ -11,37 +12,41 @@ export const AddContact = () => {
                         <form>
                             <legend className="formLegend d-flex justify-content-center">Add a new contact</legend>
                             <div class="mb-3">
-                                <label for="inputName" type= "text" className="form-label">Full Name</label>
-                                <input 
-                                type="email" 
-                                className="form-control"
-                                placeholder="John Snow" 
-                                id="inputName"/>
+                                <label for="inputName" type="text" className="form-label">Full Name</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="John Snow"
+                                    id="inputName" />
                             </div>
                             <div class="mb-3">
-                                <label for="InputEmail" type= "text" className="form-label">Email</label>
-                                <input 
-                                type="email" 
-                                className="form-control"
-                                placeholder="johnsnow@winterfell.com" 
-                                id="InputEmail"/>
+                                <label for="InputEmail" type="text" className="form-label">Email</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="johnsnow@winterfell.com"
+                                    id="InputEmail" />
                             </div>
                             <div class="mb-3">
-                                <label for="inputPhone" type= "text" className="form-label">Phone</label>
-                                <input 
-                                type="email" 
-                                className="form-control"
-                                placeholder="777-777-777" 
-                                id="inputPhone"/>
+                                <label for="inputPhone" type="text" className="form-label">Phone</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="777-777-777"
+                                    id="inputPhone" />
                             </div>
                             <div class="mb-3">
-                                <label for="inputAddress" type= "text" className="form-label">Address</label>
-                                <input 
-                                type="email" 
-                                className="form-control"
-                                placeholder="Winterfell Main Castle 2nd Floor N.4" 
-                                id="inputAddress"/>
+                                <label for="inputAddress" type="text" className="form-label">Address</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="Winterfell Main Castle 2nd Floor N.4"
+                                    id="inputAddress" />
                             </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="button">save</button>
+                            </div>
+                            <Link to="/">or get back to contacts</Link>
                         </form>
                     </div>
                 </div>
