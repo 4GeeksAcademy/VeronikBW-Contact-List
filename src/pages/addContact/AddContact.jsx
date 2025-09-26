@@ -41,10 +41,10 @@ export const AddContact = () => {
                 });
                 navigate("/");
             } else {
-                console.log("Error al guardar:", data);
+                console.log(error);
             }
         } else {
-            console.log("Faltan campos por completar");
+            console.log(error);
         }
     }
 
