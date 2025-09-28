@@ -1,3 +1,5 @@
+import { StrictMode } from "react";
+
 export const initialStore=()=>{
   return{
     message: null,
@@ -12,7 +14,8 @@ export const initialStore=()=>{
         title: "Do my homework",
         background: null,
       }
-    ]
+    ],
+    contacts: [],
   }
 }
 
@@ -28,5 +31,10 @@ export default function storeReducer(store, action = {}) {
       };
     default:
       throw Error('Unknown action.');
+    case 'SET_CONTACTS':
+      return {
+        ...store,
+        contacts: action.payload,
+      }
   }    
 }

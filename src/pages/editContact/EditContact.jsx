@@ -1,72 +1,74 @@
-import { Link, useNavigate } from "react-router-dom";
-import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
-import "./addContact.css"
-import { useState } from "react";
+ import { useNavigate, useParams } from "react-router-dom"
 
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import useGlobalReducer from "../../hooks/useGlobalReducer"
 
-export const AddContact = () => {
-    const { dispatch, store } = useGlobalReducer();
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        address: ""
-    });
+export const EditContact = () => {
+
+    const { store, dispatch } = useGlobalReducer();
+    const [currentContact, setCurrentContact] = useState({});
+    const { id } = useParams();
+
+   
+    const searchContact = () => {
+        const contact = store.contacts.find((item) => item.id == id)
+        setCurrentContact(contact)
+    }
+
+    useEffect(() => {
+        searchContact()
+    }, [store.contacts, id])
 
     const handleChange = (event) => {
-        setForm({ ...form, [event.target.name]: event.target.value });
+        setCurrentContact({
+            ...currentContact,
+            [event.target.name]: event.target.value
+        });
     };
+
 
     const navigate = useNavigate();
 
-    const addNewContact = async (event) => {
+    const handleEditContact = async (event) => {
         event.preventDefault();
-        if (form.name && form.email && form.phone && form.address) {
-            const response = await fetch("https://playground.4geeks.com/contact/agendas/veronica/contacts", {
-                method: "POST",
+        try {
+
+            const response = await fetch(`https://playground.4geeks.com/contact/agendas/veronica/contacts/${id}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify(currentContact)
             });
-            const data = await response.json();
-            console.log("Respuesta de la API:", data);
-            if (response.ok) {
-                dispatch({
-                    type: 'SET_CONTACTS',
-                    payload: [...store.contacts, data]
-                });
-                setForm({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    address: ""
-                });
-                navigate("/");
-            } else {
-                console.log(data);
+            if (!response.ok) {
+                throw new Error("No se pudo actualizar el contacto en la API");
             }
-        } else {
-            console.log("Faltan datos");
+            const updatedContacts = store.contacts.map((item) =>
+                item.id == id ? { ...item, ...currentContact } : item
+            );
+            dispatch({ type: 'SET_CONTACTS', payload: updatedContacts });
+            navigate("/");
+        } catch (error) {
+            alert(error.message);
         }
-    }
+    };
 
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-9 mx-auto mt-3">
-                        <form onSubmit={addNewContact}>
-                            <legend className="formLegend d-flex justify-content-center">Add a new contact</legend>
+                        <form onSubmit={handleEditContact}>
+                            <legend className="formLegend d-flex justify-content-center">Edit your contact</legend>
                             <div class="mb-3">
                                 <label for="inputName" type="text" className="form-label">Full Name</label>
                                 <input
                                     type="text"
                                     name="name"
-                                    value={form.name}
+                                    value={currentContact.name}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="John Snow"
                                     id="inputName" />
                             </div>
                             <div class="mb-3">
@@ -74,10 +76,9 @@ export const AddContact = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    value={form.email}
+                                    value={currentContact.email}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="johnsnow@winterfell.com"
                                     id="InputEmail" />
                             </div>
                             <div class="mb-3">
@@ -85,10 +86,9 @@ export const AddContact = () => {
                                 <input
                                     type="text"
                                     name="phone"
-                                    value={form.phone}
+                                    value={currentContact.phone}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="777-777-777"
                                     id="inputPhone" />
                             </div>
                             <div class="mb-3">
@@ -96,13 +96,12 @@ export const AddContact = () => {
                                 <input
                                     type="text"
                                     name="address"
-                                    value={form.address}
+                                    value={currentContact.address}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="Winterfell Main Castle 2nd Floor N.4"
                                     id="inputAddress" />
                             </div>
-                            <div class="d-grid gap-2">
+                            <div className="d-grid gap-2">
                                 <button
                                     class="btn btn-primary"
                                     type="submit"
@@ -115,4 +114,4 @@ export const AddContact = () => {
             </div>
         </>
     );
-};
+}

@@ -6,8 +6,9 @@ import {
     Route,
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
-import { Home  } from "./pages/home/Home.jsx";
+import { Contact } from "./pages/contact/Contact.jsx";
 import { AddContact } from "./pages/addContact/AddContact.jsx";
+import { EditContact } from "./pages/editContact/EditContact.jsx";
 
 
 export const router = createBrowserRouter(
@@ -21,8 +22,9 @@ export const router = createBrowserRouter(
       // Root Route: All navigation will start from here.
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
         {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
-        <Route path= "/" element={<Home />} />
+        <Route path= "/" element={<Contact />} />
         <Route path= "/add" element={<AddContact />} />
+        <Route path="/edit-contact/:id" element={<EditContact />} />
       </Route>
     )
 );

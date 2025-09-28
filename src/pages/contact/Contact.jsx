@@ -1,10 +1,10 @@
 
 import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
-import "./home.css"
+import "./contact.css"
 import { useNavigate } from "react-router-dom";
 import { ContactCard } from "../../components/ContactCard.jsx";
 
-export const Home = () => {
+export const Contact = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 
