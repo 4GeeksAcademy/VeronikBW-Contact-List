@@ -15,7 +15,7 @@ export const ContactCard = () => {
             const updatedContacts = store.contacts.filter((item) => item.id !== id);
             dispatch({ type: 'SET_CONTACTS', payload: updatedContacts });
         } catch (error) {
-            alert(error.message);
+            console.log(error);
         }
     };
     const { store, dispatch } = useGlobalReducer();

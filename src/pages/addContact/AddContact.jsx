@@ -30,7 +30,6 @@ export const AddContact = () => {
                 body: JSON.stringify(form)
             });
             const data = await response.json();
-            console.log("Respuesta de la API:", data);
             if (response.ok) {
                 dispatch({
                     type: 'SET_CONTACTS',
